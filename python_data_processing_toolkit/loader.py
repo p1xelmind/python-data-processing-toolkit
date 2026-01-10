@@ -1,8 +1,9 @@
 from pathlib import Path
 import csv
 import json
+from typing import Any, Union, List, Dict
 
-def load_text(path: Path):
+def load_text(path: Path) -> Union[str, List[Dict[str, Any]]]:
     suffix = path.suffix.lower()
 
     if suffix == ".txt":
@@ -17,4 +18,4 @@ def load_text(path: Path):
             reader = csv.DictReader(file)
             return list(reader)
 
-    
+    raise ValueError(f"Unsupported file type: {suffix}")
