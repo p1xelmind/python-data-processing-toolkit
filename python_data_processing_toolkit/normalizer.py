@@ -7,4 +7,4 @@ def normalize(data: Union[str, Dict[str, Any], List[Dict[str, Any]]]) -> List[Di
     if isinstance(data, dict):
         return [data]
     
-    raise TypeError("Only structured data (dict or list of dicts) can be nprmalized")
+    raise TypeError("Only structured data (dict or list of dicts) can be normalized")

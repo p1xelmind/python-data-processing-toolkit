@@ -3,7 +3,7 @@ import csv
 import json
 from typing import Any, Union, List, Dict
 
-def load_text(path: Path) -> Union[str, List[Dict[str, Any]]]:
+def load_text(path: Path) -> Union[str, Dict[str, Any], List[Dict[str, Any]]]:
     suffix = path.suffix.lower()
 
     if suffix == ".txt":
