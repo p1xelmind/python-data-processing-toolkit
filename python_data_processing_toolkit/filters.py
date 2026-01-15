@@ -23,4 +23,20 @@ def filter_range(
         min_value: float,
         max_value: float
 ) -> List[Dict[str, Any]]:
-    
+    result = []
+
+    for record in records:
+        if field not in record:
+            continue
+
+        value = record[field]
+
+        try:
+            numeric_value = float(value)
+        except (TypeError, ValueError):
+            continue
+
+        if min_value <= numeric_value <= max_value:
+            result.append(record)
+        
+    return result
