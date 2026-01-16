@@ -58,3 +58,23 @@ def median(
         return values[countity_nums//2]
     elif countity_nums % 2 == 0:
         return values[(countity_nums//2-1) + (countity_nums//2)] / 2 
+    
+
+def histogram(
+        records: List[Dict[str, Any]],
+        field: str
+) -> Dict[Any, int]:
+    result = {}
+
+    for record in records:
+        if field not in record:
+            continue
+        
+        value = record[field]
+        
+        if value in result:
+            result[value] += 1
+        else:
+            result[value] = 1
+    
+    return result
