@@ -78,3 +78,23 @@ def histogram(
             result[value] = 1
     
     return result
+
+
+def group_by(
+        records: List[Dict[str, Any]],
+        field: str
+) -> Dict[Any, List[Dict[str, Any]]]:
+    result = {}
+    
+    for record in records:
+        if field not in record:
+            continue
+
+        value = record[field]
+
+        if value in result:
+            result[value].append(record)
+        else:
+            result[value] = [record] 
+    
+    return result
