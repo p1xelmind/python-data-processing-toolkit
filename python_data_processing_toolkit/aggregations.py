@@ -98,3 +98,35 @@ def group_by(
             result[value] = [record] 
     
     return result
+
+
+def group_mean(
+        records: List[Dict[str, Any]],
+        group_field: str,
+        value_field: str
+) -> Dict[Any, float]:
+    result = {}
+    groups = {}
+
+    for record in records:
+        if group_field not in record or value_field not in record:
+            continue
+
+        group_value = record[group_field]
+
+        if group_value in groups:
+            try:
+                groups[group_value]["sum"] += float(record[value_field])
+                groups[group_value]["count"] += 1
+            except(TypeError, ValueError):
+                continue
+        else:
+            try:
+                groups[group_value] = {"sum": float(record[value_field]), "count": 1}
+            except(TypeError, ValueError):
+                continue
+
+    for group_value, data in groups.items():
+        result[group_value] = data["sum"] / data["count"]
+
+    return result
