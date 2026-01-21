@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Tuple, Type
+from typing import Any, Tuple, Type, Dict
 
 @dataclass(frozen=True)
 class FieldSchema:
@@ -7,6 +7,14 @@ class FieldSchema:
     types: Tuple[Type, ...]
     required: bool = True
 
+
 @dataclass(frozen=True)
 class RecordSchema:
-    fields: Tuple[FieldSchema, ...]
+    fields: Dict[str, FieldSchema]
+    allow_extra_fields: bool = True
+
+
+def validate_record(
+        record: Dict[str, Any],
+        schema: RecordSchema
+) -> bool:
